@@ -14,11 +14,8 @@ import { MealDetail } from './screens/MealDetail'
 import { Record } from './screens/Record'
 import { SettingsProvider, useSettings } from './settings'
 import './App.css'
+import { dayMinutes } from './data/day'
 
-const minutesOf = (time: string) => {
-  const [h, m] = time.split(':').map(Number)
-  return h * 60 + m
-}
 
 // タブの上にかぶせる画面
 type Overlay =
@@ -59,7 +56,7 @@ function AppScreens() {
   const editDay = (daysAgo: number, change: (list: DayRecord[]) => DayRecord[]) => {
     setBook((b) => ({
       ...b,
-      [daysAgo]: change(recordsFor(daysAgo, b)).sort((x, y) => minutesOf(x.time) - minutesOf(y.time)),
+      [daysAgo]: change(recordsFor(daysAgo, b)).sort((x, y) => dayMinutes(x.time) - dayMinutes(y.time)),
     }))
   }
 

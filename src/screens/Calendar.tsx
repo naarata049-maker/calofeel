@@ -4,6 +4,7 @@ import { HISTORY_DAYS, daysBetween, recordsFor, totals, type DayBook } from '../
 import { rangeOf } from '../data/settings'
 import { useSettings } from '../settings'
 import './Calendar.css'
+import { appToday } from '../data/day'
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 
@@ -20,8 +21,7 @@ type Props = {
 
 export function Calendar({ book, selected, onClose, onPick }: Props) {
   const { settings, dailyBurn } = useSettings()
-  const now = new Date()
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const today = appToday()
   const selectedDate = new Date(today)
   selectedDate.setDate(today.getDate() - selected)
   // 0 = 今月、-1 = 先月

@@ -5,6 +5,7 @@ import { RecordSheet } from '../components/RecordSheet'
 import { HISTORY_DAYS, recordsFor, type DayBook } from '../data/history'
 import { useSettings } from '../settings'
 import './Home.css'
+import { appToday } from '../data/day'
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 
@@ -43,7 +44,7 @@ export function Home({ book, startDaysAgo = 0, onOpenMeal, onOpenCalendar }: Pro
   const { dailyBurn } = useSettings()
   const day = { records: recordsFor(-offset, book), title: dayTitle(-offset) }
   const laps = lapCount(day.records, dailyBurn)
-  const date = new Date()
+  const date = appToday()
   date.setDate(date.getDate() + offset)
 
   function changeDay(next: number) {

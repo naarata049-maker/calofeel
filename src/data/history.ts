@@ -3,6 +3,7 @@ import toast from '../assets/photos/toast.jpg'
 import ramen from '../assets/photos/ramen.jpg'
 import donut from '../assets/photos/donut.jpg'
 import teriyaki from '../assets/photos/teriyaki.jpg'
+import { appToday, dayMinutes } from './day'
 
 // 過去の日の仮の記録。昨日と一昨日は today.ts の見本、それより前は日付から決まった数字で作る
 // （同じ日はいつ開いても同じ記録になる）
@@ -43,11 +44,10 @@ function generated(date: Date): DayRecord[] {
     const run = rand() < 0.3
     list.push({ id: `${key}-ex`, kind: 'exercise', time: `${17 + Math.floor(rand() * 2)}:30`, name: run ? 'ランニング 30分' : 'ウォーキング 30分', kcal: run ? 300 : 150 })
   }
-  const minutes = (t: string) => Number(t.split(':')[0]) * 60 + Number(t.split(':')[1])
-  return list.sort((a, b) => minutes(a.time) - minutes(b.time))
+  return list.sort((a, b) => dayMinutes(a.time) - dayMinutes(b.time))
 }
 
-export function dateAgo(daysAgo: number, today = new Date()) {
+export function dateAgo(daysAgo: number, today = appToday()) {
   const d = new Date(today.getFullYear(), today.getMonth(), today.getDate())
   d.setDate(d.getDate() - daysAgo)
   return d

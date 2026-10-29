@@ -7,6 +7,7 @@ import { rangeOf } from '../data/settings'
 import { MEAL_COLOR } from '../data/today'
 import { useSettings } from '../settings'
 import './Month.css'
+import { appToday } from '../data/day'
 
 // 「記録」タブ：週と月の、食べた量の棒グラフ（Figma 5-1）
 type Props = {
@@ -35,8 +36,7 @@ export function Month({ book, onOpenDay }: Props) {
   const { settings, dailyBurn } = useSettings()
   const [mode, setMode] = useState(1) // 0 週・1 月
   const [shift, setShift] = useState(0) // 0 = いまの週・月、-1 = ひとつ前
-  const now = new Date()
-  const todayDate = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  const todayDate = appToday()
 
   // 表示する日のならび
   let dates: Date[]

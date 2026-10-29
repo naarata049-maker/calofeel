@@ -6,6 +6,7 @@ import { HISTORY_DAYS, recordsFor, totals, type DayBook } from '../data/history'
 import { mondayOf, sameDay, type WeightEntry } from '../data/weight'
 import { useSettings } from '../settings'
 import './Body.css'
+import { appToday } from '../data/day'
 
 // 「変化」タブ：体重の週の平均（Figma 6-1）と、体重を記録（6-2）
 type Props = {
@@ -30,7 +31,7 @@ export function Body({ book, weights, onRecordWeight, onReview }: Props) {
   const last = weights[weights.length - 1]
   const prev = weights[weights.length - 2]
   const diff = prev ? Math.round((last.kg - prev.kg) * 10) / 10 : 0
-  const next = new Date(mondayOf(new Date()))
+  const next = new Date(mondayOf(appToday()))
   if (weights.some((w) => sameDay(mondayOf(w.date), next))) next.setDate(next.getDate() + 7)
 
   // 記録から予想した体重：最初の週から、摂取と消費の差（7,200kcal ≒ 1kg）を積み上げる
@@ -56,7 +57,7 @@ export function Body({ book, weights, onRecordWeight, onReview }: Props) {
   const line = (list: number[]) => list.map((v, i) => `${i ? 'L' : 'M'} ${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ')
   const labelEvery = shown.length > 7 ? 3 : 1
 
-  const now = new Date()
+  const now = appToday()
 
   return (
     <div className="body">

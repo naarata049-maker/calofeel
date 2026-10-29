@@ -76,7 +76,7 @@ export const YESTERDAY: DayRecord[] = [
   { id: 'y5', kind: 'meal', time: '19:00', category: 'dinner', name: '鶏の照り焼き', kcal: 1300, photo: teriyaki },
 ]
 
-// 仮の2日前：Figma「1周をこえた日」と同じ記録（摂取 5,000 kcal）。1周 4,500 をこえた 500 が2つ目の円に入る
+// 仮の一昨日：Figma「1周をこえた日」と同じ記録（摂取 5,000 kcal）。1周 4,500 をこえた 500 が2つ目の円に入る
 export const TWO_DAYS_AGO: DayRecord[] = [
   { id: 'z1', kind: 'meal', time: '8:10', category: 'breakfast', name: 'トーストと目玉焼き', kcal: 400, photo: toast },
   { id: 'z2', kind: 'meal', time: '12:30', category: 'lunch', name: '醤油ラーメン', kcal: 700, photo: ramen },

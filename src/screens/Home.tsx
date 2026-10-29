@@ -7,12 +7,13 @@ import './Home.css'
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 
-// いまは仮の3日分だけ（0 = 今日、-1 = 昨日、-2 = おととい）
-const DAYS = [
-  { records: TODAY, title: '今日' },
-  { records: YESTERDAY, title: '昨日' },
-  { records: TWO_DAYS_AGO, title: 'おととい' },
-]
+// いまは仮の3日分だけ（0 = 今日、-1 = 昨日、-2 = 一昨日）
+const DAYS = [TODAY, YESTERDAY, TWO_DAYS_AGO]
+
+// 見出し：今日・昨日・一昨日、それより前は「○日前」
+function dayTitle(daysAgo: number) {
+  return ['今日', '昨日', '一昨日'][daysAgo] ?? `${daysAgo}日前`
+}
 
 // 円どうしの間隔（Figma 275:3 と 275:115）
 const LAP_GAP = 321
@@ -32,7 +33,7 @@ export function Home() {
   const [drag, setDrag] = useState(0)
   const pointer = useRef<{ x: number; y: number; moved: boolean } | null>(null)
 
-  const day = DAYS[-offset]
+  const day = { records: DAYS[-offset], title: dayTitle(-offset) }
   const laps = lapCount(day.records)
   const date = new Date()
   date.setDate(date.getDate() + offset)

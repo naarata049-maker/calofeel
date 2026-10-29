@@ -221,7 +221,8 @@
 .record-photo {
   display: block;
   width: 100%;
-  height: 180px;
+  /* 「量」から下が「手動で入力」の画面と同じ位置になる高さ（林さんの指定） */
+  height: 152px;
   margin-top: 12px;
   border-radius: 16px;
   object-fit: cover;
@@ -346,7 +347,8 @@
   margin-top: 14px;
 }
 
-.candidates + .record-heading + .record-segment {
+.candidates + .record-heading + .record-segment,
+.record-photo ~ .record-segment {
   margin-top: 7px;
 }
 
@@ -468,7 +470,9 @@
   .record-rows .form-row { height: 46px; }
   .record-note { margin-top: 8px; }
 
-  .record-photo { height: 120px; margin-top: 8px; }
+  .record-photo { height: 133px; margin-top: 8px; }
+  .candidates + .record-heading + .record-segment,
+  .record-photo ~ .record-segment { margin-top: 6px; }
   .record-photo + .record-heading { margin-top: 8px; }
   .record-photo + .record-heading + .record-chips { margin-top: 4px; }
 

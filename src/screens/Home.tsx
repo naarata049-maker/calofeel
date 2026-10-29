@@ -2,13 +2,13 @@ import { useRef, useState, type PointerEvent } from 'react'
 import { Header } from '../components/Header'
 import { Meter, lapCount } from '../components/Meter'
 import { RecordSheet } from '../components/RecordSheet'
-import { TWO_DAYS_AGO, YESTERDAY, type DayRecord } from '../data/today'
+import { type DayRecord } from '../data/today'
+import { HISTORY_DAYS, recordsFor } from '../data/history'
+import { useSettings } from '../settings'
 import './Home.css'
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 
-// 前の日は仮の2日分だけ（-1 = 昨日、-2 = 一昨日）
-const PAST_DAYS = [YESTERDAY, TWO_DAYS_AGO]
 
 // 見出し：今日・昨日・一昨日、それより前は「○日前」
 function dayTitle(daysAgo: number) {
@@ -24,18 +24,19 @@ function formatDate(d: Date) {
   return `${d.getMonth() + 1}月${d.getDate()}日（${WEEKDAYS[d.getDay()]}）`
 }
 
-export function Home({ today }: { today: DayRecord[] }) {
+// startDaysAgo：「記録」のグラフで日をタップしたときは、その日から開く
+export function Home({ today, startDaysAgo = 0 }: { today: DayRecord[]; startDaysAgo?: number }) {
   // メーターをタップすると記録シートが下がる（どの日も同じ）
   const [lowered, setLowered] = useState(false)
-  const [offset, setOffset] = useState(0)
+  const [offset, setOffset] = useState(-startDaysAgo)
   // 1周をこえた日は、横にスワイプして2つ目の円を見る
   const [lap, setLap] = useState(0)
   const [drag, setDrag] = useState(0)
   const pointer = useRef<{ x: number; y: number; moved: boolean } | null>(null)
 
-  const DAYS = [today, ...PAST_DAYS]
-  const day = { records: DAYS[-offset], title: dayTitle(-offset) }
-  const laps = lapCount(day.records)
+  const { dailyBurn } = useSettings()
+  const day = { records: recordsFor(-offset, today), title: dayTitle(-offset) }
+  const laps = lapCount(day.records, dailyBurn)
   const date = new Date()
   date.setDate(date.getDate() + offset)
 
@@ -79,7 +80,7 @@ export function Home({ today }: { today: DayRecord[] }) {
       <Header
         sub={formatDate(date)}
         title={day.title}
-        onPrev={offset > -(DAYS.length - 1) ? () => changeDay(offset - 1) : undefined}
+        onPrev={offset > -HISTORY_DAYS ? () => changeDay(offset - 1) : undefined}
         onNext={offset < 0 ? () => changeDay(offset + 1) : undefined}
       />
       <div

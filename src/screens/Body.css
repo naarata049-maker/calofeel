@@ -1,0 +1,171 @@
+.body {
+  padding-bottom: 24px;
+}
+
+.body-mode {
+  width: 201px;
+  margin: 12px auto 0;
+}
+
+.body-now {
+  display: flex;
+  align-items: center;
+  margin: 18px 24px 0;
+}
+
+.body-now p {
+  flex: 1;
+  margin: 0;
+}
+
+.body-now strong {
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 37px;
+}
+
+.body-now p span {
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-sub);
+}
+
+.body-diff {
+  padding: 0 10px;
+  border-radius: 15px;
+  background: var(--range-bg);
+  color: var(--range);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.body-chart {
+  position: relative;
+  width: 361px;
+  height: 230px;
+  margin: 14px auto 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+}
+
+.body-chart svg {
+  position: absolute;
+  inset: -1px;
+  display: block;
+}
+
+.body-chart text {
+  font-family: var(--font);
+}
+
+.body-axis,
+.body-date {
+  font-size: 9px;
+  fill: var(--ink-sub);
+}
+
+.body-date.is-last {
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+.body-legend {
+  font-size: 10px;
+  fill: var(--ink-sub);
+}
+
+.body-note {
+  margin: 14px 24px 0;
+  font-size: 12px;
+  line-height: 19px;
+  color: var(--ink-sub);
+}
+
+.body-rows {
+  margin: 2px 24px 0;
+}
+
+.body-review {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 32px);
+  max-width: 361px;
+  height: 72px;
+  margin: 20px auto 0;
+  padding: 0 18px 0 16px;
+  border-radius: 16px;
+  background: var(--range-bg);
+  color: var(--range);
+  text-align: left;
+}
+
+.body-review > span:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.body-review strong {
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.body-review small {
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.body-review-arrow {
+  font-size: 20px;
+}
+
+/* 6-2 体重を記録 */
+.weight-input {
+  display: flex;
+  align-items: center;
+  height: 84px;
+  margin-top: 22px;
+  padding: 0 14px;
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.weight-input p {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.weight-input strong {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.weight-input span {
+  margin-left: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-sub);
+}
+
+.weight-input .round-button {
+  padding-left: 0;
+}
+
+.weight-note {
+  margin: 16px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-sub);
+}
+
+.weight-rows {
+  margin: 16px 8px 0;
+}
+
+.weight-save {
+  margin-top: 40px;
+}

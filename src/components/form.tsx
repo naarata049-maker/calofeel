@@ -66,12 +66,13 @@ export function KcalCard({ caption, kcal, note, onEdit, icon, exercise }: {
 }
 
 // 「時刻」「区分」などの行（右に ›）
-export function FormRow({ label, value, dot, onClick, children }: {
+export function FormRow({ label, value, dot, onClick, children, arrow = true }: {
   label: string
   value: string
   dot?: string
   onClick?: () => void
   children?: ReactNode
+  arrow?: boolean
 }) {
   return (
     <div className="form-row">
@@ -79,7 +80,7 @@ export function FormRow({ label, value, dot, onClick, children }: {
         {dot && <span className="form-row-dot" style={{ background: dot }} />}
         <span className="form-row-label">{label}</span>
         <span className="form-row-value">{value}</span>
-        <span className="form-row-arrow" aria-hidden="true">›</span>
+        {arrow && <span className="form-row-arrow" aria-hidden="true">›</span>}
       </button>
       {children}
     </div>
@@ -153,22 +154,26 @@ function useVisibleArea(enabled?: boolean) {
   return area
 }
 
-// カロリーを数字キーで打つシート（R2b・R3b）
-export function KcalSheet({ title, sub, initial, confirmLabel, exercise, onClose, onConfirm }: {
+// 数字キーで打つシート（カロリー R2b・R3b、年齢・身長 など）
+export function NumberSheet({ title, sub, initial, confirmLabel, unit, steps = [-100, -50, 50, 100], maxDigits = 4, exercise, onClose, onConfirm }: {
   title: string
-  sub: string
+  sub?: string
   initial: number
   confirmLabel: string
+  unit: string
+  steps?: number[]
+  maxDigits?: number
   exercise?: boolean
   onClose: () => void
-  onConfirm: (kcal: number) => void
+  onConfirm: (value: number) => void
 }) {
   const [text, setText] = useState(String(initial))
   const value = Number(text) || 0
-  const set = (n: number) => setText(String(Math.max(0, Math.min(9999, n))))
+  const max = 10 ** maxDigits - 1
+  const set = (n: number) => setText(String(Math.max(0, Math.min(max, n))))
   const press = (key: string) => {
     if (key === 'back') setText((t) => t.slice(0, -1))
-    else setText((t) => (t === '0' ? key : (t + key).slice(0, 4)))
+    else setText((t) => (t === '0' ? key : (t + key).slice(0, maxDigits)))
   }
 
   return (
@@ -176,10 +181,10 @@ export function KcalSheet({ title, sub, initial, confirmLabel, exercise, onClose
       <div className="kcal-input" aria-live="polite">
         <span className={`kcal-input-number${exercise ? ' is-exercise' : ''}`}>{text}</span>
         <span className="kcal-input-caret" />
-        <span className="kcal-input-unit">kcal</span>
+        <span className="kcal-input-unit">{unit}</span>
       </div>
       <div className="kcal-steps">
-        {[-100, -50, 50, 100].map((d) => (
+        {steps.map((d) => (
           <button key={d} onClick={() => set(value + d)}>{d > 0 ? `+${d}` : `−${-d}`}</button>
         ))}
       </div>
@@ -196,4 +201,8 @@ export function KcalSheet({ title, sub, initial, confirmLabel, exercise, onClose
       </div>
     </Sheet>
   )
+}
+
+export function KcalSheet(props: Omit<Parameters<typeof NumberSheet>[0], 'unit'>) {
+  return <NumberSheet {...props} unit="kcal" />
 }

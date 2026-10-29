@@ -58,8 +58,6 @@ export function exerciseColor(index: number) {
   return EXERCISE_COLORS[index % EXERCISE_COLORS.length]
 }
 
-// 日常の消費（基礎代謝×普段の動き）。半円＝この量
-export const DAILY_BURN = 2250
 
 // 仮の1日（Figma のホームの記録をもとに、夕食だけ1周に収まる量にした）
 export const TODAY: DayRecord[] = [

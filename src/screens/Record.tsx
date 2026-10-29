@@ -5,7 +5,8 @@ import {
 } from '../data/foods'
 import { MEAL_COLOR, MEAL_LABEL, type DayRecord, type MealCategory, type NewRecord } from '../data/today'
 import { Chip, FormRow, KcalCard, KcalSheet, Segmented, Sheet, TimeRow } from '../components/form'
-import { CheckIcon, ChevronIcon, CloseIcon, ExerciseIcon, FinderFrame, PencilIcon, PlusMinusIcon } from '../components/icons'
+import { PageHeader } from '../components/PageHeader'
+import { CheckIcon, ExerciseIcon, FinderFrame, PencilIcon, PlusMinusIcon } from '../components/icons'
 import samplePhoto from '../assets/photos/ramen.jpg'
 import './Record.css'
 
@@ -44,17 +45,6 @@ export function Record({ burned, onClose, onSave }: Props) {
         <ExerciseForm burned={burned} onClose={onClose} onMode={toMode} onSave={save} />
       )}
     </div>
-  )
-}
-
-function RecordHeader({ title, onClose, back }: { title: string; onClose: () => void; back?: boolean }) {
-  return (
-    <header className="record-header">
-      <button className="round-button" onClick={onClose} aria-label={back ? '戻る' : '閉じる'}>
-        {back ? <ChevronIcon direction="left" /> : <CloseIcon />}
-      </button>
-      <h1>{title}</h1>
-    </header>
   )
 }
 
@@ -128,7 +118,7 @@ function CameraScreen({ onClose, onMode, onManual, onPhoto }: {
 
   return (
     <>
-      <RecordHeader title="記録する" onClose={onClose} />
+      <PageHeader title="記録する" onClose={onClose} />
       <ModeSwitch value={0} onChange={onMode} />
       <div className="camera">
         <video ref={video} className="camera-view" playsInline muted hidden={!live} />
@@ -215,7 +205,9 @@ function MealForm({ photo, burned, onBack, onMode, onSave }: {
 
   return (
     <>
-      <RecordHeader title={photo ? 'これでしたか？' : '記録する'} onClose={onBack} back={!!photo} />
+      {photo
+        ? <PageHeader title="これでしたか？" onBack={onBack} />
+        : <PageHeader title="記録する" onClose={onBack} />}
       <div className="record-body">
         {photo ? (
           <>
@@ -383,7 +375,7 @@ function ExerciseForm({ burned, onClose, onMode, onSave }: {
 
   return (
     <>
-      <RecordHeader title="記録する" onClose={onClose} />
+      <PageHeader title="記録する" onClose={onClose} />
       <div className="record-body">
         <ModeSwitch value={1} onChange={onMode} />
         <Heading>何をしましたか？</Heading>

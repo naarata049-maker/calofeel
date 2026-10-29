@@ -1,0 +1,111 @@
+.mypage {
+  padding-bottom: 24px;
+}
+
+.mypage-profile {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 32px);
+  height: 72px;
+  margin: 12px 16px 0;
+  padding: 0 10px 0 8px;
+  text-align: left;
+}
+
+.mypage-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--card);
+}
+
+.mypage-name {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-left: 16px;
+}
+
+.mypage-name strong {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.mypage-name small {
+  font-size: 12px;
+  color: var(--ink-sub);
+}
+
+.mypage-arrow,
+.mypage-burn-arrow {
+  font-size: 18px;
+  color: var(--ink-sub);
+}
+
+.mypage-burn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 32px);
+  height: 120px;
+  margin: 12px 16px 0;
+  padding: 14px 16px 0;
+  border-radius: 16px;
+  background: rgba(244, 245, 243, 0.8);
+  text-align: left;
+}
+
+.mypage-burn-caption {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: var(--ink-sub);
+}
+
+.mypage-burn-number {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-sub);
+  line-height: 34px;
+}
+
+.mypage-burn-number strong {
+  margin-right: 8px;
+  font-size: 28px;
+  color: var(--ink);
+}
+
+.mypage-burn-range {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mypage-chip {
+  padding: 0 14px;
+  border-radius: 14px;
+  background: var(--range-bg);
+  color: var(--range);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.mypage-burn-note {
+  font-size: 11px;
+  color: var(--exercise-text);
+}
+
+.mypage-burn-arrow {
+  position: absolute;
+  top: 40px;
+  right: 18px;
+  font-size: 20px;
+}
+
+.mypage-rows {
+  margin: 16px 24px 0;
+}

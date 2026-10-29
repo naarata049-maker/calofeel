@@ -123,3 +123,14 @@ export function BowlIcon() {
     </svg>
   )
 }
+
+// アプリのアイコン（Figma 1-1 ロゴ L2「弧と目安の印」）
+export function AppIcon({ size = 37 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 37.33 37.33" fill="none" aria-hidden="true">
+      <rect width="37.33" height="37.33" rx="8.71" fill="#1E2422" />
+      <path d="M8.71111 23.6441C8.7109 21.3333 9.51456 19.0944 10.9843 17.3112C12.454 15.528 14.4983 14.3117 16.7667 13.8707C19.035 13.4296 21.3861 13.7914 23.4169 14.894C25.4477 15.9966 27.0317 17.7713 27.8973 19.9139" stroke="white" strokeWidth="3.73333" strokeLinecap="round" />
+      <path d="M31.528 17.3693C32.6303 19.6276 33.1185 22.1362 32.9436 24.6431" stroke="#7CC79A" strokeWidth="1.55556" strokeLinecap="round" />
+    </svg>
+  )
+}

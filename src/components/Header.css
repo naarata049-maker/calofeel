@@ -1,0 +1,33 @@
+.header {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 56px 45px 12px;
+  padding-top: max(56px, env(safe-area-inset-top));
+}
+
+.header-title {
+  text-align: center;
+}
+
+.header-title p,
+.header-title h1 {
+  margin: 0;
+}
+
+.round-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding-left: 2px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 0.8px solid #ddd;
+  box-shadow: 0 1.5px 5px rgba(0, 0, 0, 0.18);
+}
+
+.round-button:active {
+  transform: scale(0.95);
+}

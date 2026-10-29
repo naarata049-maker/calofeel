@@ -1,0 +1,56 @@
+.tabbar {
+  position: relative;
+  flex: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 64px 1fr 1fr;
+  height: var(--tabbar-height);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-top: 12px;
+  color: var(--ink-off);
+}
+
+.tab span {
+  font-size: 10px;
+  color: var(--ink-sub);
+}
+
+.tab.is-current {
+  color: var(--ink);
+}
+
+.tab.is-current span {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.tab-add-slot {
+  position: relative;
+}
+
+/* ＋ボタンはタブバーの上に 20px はみ出す */
+.tab-add {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 26px;
+  background: var(--ink);
+  transition: transform 0.15s;
+}
+
+.tab-add:active {
+  transform: translateX(-50%) scale(0.94);
+}

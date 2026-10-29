@@ -1,0 +1,89 @@
+/* Calofeel の共通ルール（Figma「プロトタイプ」ページ 275:3 などから） */
+:root {
+  /* 文字・線 */
+  --ink: #1e2422;          /* 見出し・本文・選択中のタブ */
+  --ink-sub: #6b7370;      /* 日付・時刻・補足 */
+  --ink-off: #8a928f;      /* 選ばれていないタブのアイコン */
+  --line: #d5d9d7;         /* 区切り線 */
+  --line-soft: #e3e6e3;    /* タイムラインの縦線 */
+
+  /* 面 */
+  --bg: #ffffff;
+  --card: #f4f5f3;
+  --sheet: rgba(255, 255, 255, 0.3); /* 記録シート（白30%＋ぼかし） */
+
+  /* 目安 */
+  --range-bg: #e7f2eb;
+  --range: #3e7a58;
+  --range-mark: #7fb394;
+  /* 目安より上 */
+  --over-bg: #fbebdd;
+  --over: #a2531c;
+
+  /* 摂取（食事の区分ごとに固定） */
+  --meal-breakfast: #fe8b34; /* 朝食 オレンジ */
+  --meal-lunch: #9ebd1c;     /* 昼食 黄緑 */
+  --meal-snack: #ff8384;     /* 間食 ピンク */
+  --meal-dinner: #ffc753;    /* 夕食 黄 */
+  --meal-other: #eed11f;     /* その他 レモン */
+
+  /* 消費（運動は記録した順に回す） */
+  --exercise-text: #3d78b8;
+  --exercise-1: #60b5fe; /* 青 */
+  --exercise-2: #05c8ba; /* 青緑 */
+  --exercise-3: #a3a2fe; /* すみれ */
+  --exercise-4: #02c2e3; /* 水色 */
+  --exercise-5: #c293ff; /* 紫 */
+
+  /* 文字 */
+  --font: 'Noto Sans JP', system-ui, sans-serif;
+  --font-logo: 'Outfit', sans-serif;
+
+  /* 大きさ */
+  --app-width: 393px;
+  --tabbar-height: 84px;
+  --radius-card: 16px;
+  --radius-button: 52px;
+
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: #eef0ee;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* 文字の大きさ（Figma で使っているもの） */
+.t-title { font-size: 24px; font-weight: 700; }
+.t-heading { font-size: 14px; font-weight: 700; }
+.t-body { font-size: 14px; font-weight: 500; }
+.t-kcal { font-size: 13px; font-weight: 700; }
+.t-date { font-size: 13px; color: var(--ink-sub); }
+.t-sub { font-size: 12px; color: var(--ink-sub); }
+.t-caption { font-size: 11px; color: var(--ink-sub); }
+.t-number { font-size: 31px; font-weight: 700; }
+.logo { font-family: var(--font-logo); font-weight: 600; }

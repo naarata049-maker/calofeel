@@ -452,3 +452,33 @@
 .sheet-button.is-category {
   margin-top: 34px;
 }
+
+/* Safari のバーがあると見える高さは 700px ほどになる。
+   スクロールしなくても「記録する」まで見えるよう、すき間と写真を詰める */
+@media (max-height: 800px) {
+  .record-mode { margin-top: 8px; }
+  .record-body { padding-bottom: 6px; }
+  .record-footer { padding-top: 8px; }
+  .record-heading { margin-top: 12px; }
+  .record-chips { margin-top: 6px; }
+  .record-segment { margin-top: 6px; }
+  .record-card,
+  .record-card.is-exercise { margin-top: 10px; }
+  .record-rows { margin-top: 4px; }
+  .record-rows .form-row { height: 46px; }
+  .record-note { margin-top: 8px; }
+
+  .record-photo { height: 120px; margin-top: 8px; }
+  .record-photo + .record-heading { margin-top: 8px; }
+  .record-photo + .record-heading + .record-chips { margin-top: 4px; }
+
+  .record-mode + .record-heading { margin-top: 14px; }
+  .name-input { margin-top: 6px; }
+  .candidates { margin-top: 6px; }
+  .candidates button { height: 38px; }
+  .candidates + .record-heading,
+  .candidates-empty + .record-heading { margin-top: 10px; }
+
+  .minutes { height: 50px; margin-top: 6px; }
+  .minutes + .record-heading { margin-top: 12px; }
+}

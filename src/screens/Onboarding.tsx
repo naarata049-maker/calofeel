@@ -34,7 +34,7 @@ export function Onboarding({ start, onDone }: { start: OnboardingStart; onDone: 
     return (
       <div className="onboarding is-welcome">
         <div className="welcome-logo">
-          <AppIcon />
+          <AppIcon size={49} />
           <span className="logo">calofeel</span>
         </div>
         <h1 className="welcome-title">カロリーを、数字から感覚へ。</h1>

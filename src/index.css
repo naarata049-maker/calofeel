@@ -41,7 +41,11 @@
 
   /* 大きさ */
   --app-width: 393px;
-  --tabbar-height: 84px;
+  --tabbar-height: 56px;
+  /* スマホのブラウザでは時計・電池の帯やホームバーの分を空けない。
+     PC で見るときだけ、Figma（393×852）と同じく上 52px・下 28px を空ける */
+  --status-bar: env(safe-area-inset-top, 0px);
+  --home-indicator: env(safe-area-inset-bottom, 0px);
   --radius-card: 16px;
   --radius-button: 52px;
 

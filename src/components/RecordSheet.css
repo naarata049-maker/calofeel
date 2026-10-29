@@ -1,6 +1,6 @@
 .record-sheet {
   position: absolute;
-  top: 336px;
+  top: calc(284px + var(--status-bar));
   left: 0;
   right: 0;
   bottom: 0;
@@ -16,7 +16,7 @@
 
 /* メーターをタップすると下がって、円が全部見える */
 .record-sheet.is-lowered {
-  top: 454px;
+  top: calc(402px + var(--status-bar));
 }
 
 .record-sheet-head {

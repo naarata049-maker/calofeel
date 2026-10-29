@@ -5,16 +5,17 @@ import './RecordSheet.css'
 type Props = {
   records: DayRecord[]
   lowered: boolean
+  title: string
 }
 
 // 今日の記録（白30%＋背景ぼかしの下地）。シートの中だけスクロールする
-export function RecordSheet({ records, lowered }: Props) {
+export function RecordSheet({ records, lowered, title }: Props) {
   let exerciseIndex = 0
 
   return (
     <section className={`record-sheet${lowered ? ' is-lowered' : ''}`}>
       <header className="record-sheet-head">
-        <h2 className="t-heading">今日の記録</h2>
+        <h2 className="t-heading">{title}</h2>
         <span className="t-sub">{records.length}件</span>
       </header>
       <ol className="record-list">

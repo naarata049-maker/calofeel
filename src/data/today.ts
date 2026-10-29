@@ -66,3 +66,12 @@ export const TODAY: DayRecord[] = [
   { id: 'r4', kind: 'exercise', time: '18:00', name: 'ウォーキング 30分', kcal: 150 },
   { id: 'r5', kind: 'meal', time: '19:30', category: 'dinner', name: '鶏の照り焼き', kcal: 800, photo: teriyaki },
 ]
+
+// 仮の前の日：摂取 3,000 kcal（1周 4,500 の3分の2）で、円が記録シートの下まで回る日
+export const YESTERDAY: DayRecord[] = [
+  { id: 'y1', kind: 'meal', time: '8:30', category: 'breakfast', name: 'トーストと目玉焼き', kcal: 500, photo: toast },
+  { id: 'y2', kind: 'meal', time: '12:10', category: 'lunch', name: '醤油ラーメン', kcal: 900, photo: ramen },
+  { id: 'y3', kind: 'meal', time: '15:30', category: 'snack', name: 'ドーナツ', kcal: 300, photo: donut },
+  { id: 'y4', kind: 'exercise', time: '17:40', name: 'ウォーキング 30分', kcal: 150 },
+  { id: 'y5', kind: 'meal', time: '19:00', category: 'dinner', name: '鶏の照り焼き', kcal: 1300, photo: teriyaki },
+]

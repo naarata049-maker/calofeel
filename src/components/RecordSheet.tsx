@@ -1,5 +1,5 @@
 import { MEAL_COLOR, MEAL_LABEL, exerciseColor, type DayRecord } from '../data/today'
-import { ExerciseIcon } from './icons'
+import { BowlIcon, ExerciseIcon } from './icons'
 import './RecordSheet.css'
 
 type Props = {
@@ -28,8 +28,10 @@ export function RecordSheet({ records, lowered, title }: Props) {
               <span className="record-dot" style={{ background: color }} />
               {isExercise ? (
                 <span className="record-thumb is-exercise"><ExerciseIcon /></span>
-              ) : (
+              ) : r.photo ? (
                 <img className="record-thumb" src={r.photo} alt="" />
+              ) : (
+                <span className="record-thumb is-exercise"><BowlIcon /></span>
               )}
               <span className="record-text">
                 <span className="t-caption">{isExercise ? '運動' : MEAL_LABEL[r.category]}</span>

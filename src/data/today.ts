@@ -25,6 +25,9 @@ export type ExerciseRecord = {
 
 export type DayRecord = MealRecord | ExerciseRecord
 
+// 記録する画面で作る、id をつける前の記録
+export type NewRecord = Omit<MealRecord, 'id'> | Omit<ExerciseRecord, 'id'>
+
 export const MEAL_LABEL: Record<MealCategory, string> = {
   breakfast: '朝食',
   lunch: '昼食',

@@ -1,0 +1,367 @@
+/* 切り替え：灰色の下地に、選んだものだけ黒 */
+.segmented {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  height: 40px;
+  padding: 4px;
+  border-radius: 20px;
+  background: var(--card);
+}
+
+.segmented button {
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-sub);
+  transition: background 0.15s, color 0.15s;
+}
+
+.segmented button.is-selected {
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.chip {
+  height: 34px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.chip.is-selected {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.input-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 36px;
+  padding: 0 19px 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* カロリーのカード */
+.kcal-card {
+  padding: 13px 16px 9px;
+  border-radius: var(--radius-card);
+  background: rgba(244, 245, 243, 0.8);
+}
+
+.kcal-card p {
+  margin: 0;
+}
+
+.kcal-card-caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 13px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-sub);
+}
+
+.kcal-card-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 36px;
+  margin-top: 4px;
+}
+
+.kcal-card.has-icon {
+  padding-bottom: 11px;
+}
+
+.kcal-card.has-icon .kcal-card-main {
+  height: 46px;
+  margin-top: 10px;
+}
+
+.kcal-card-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.kcal-card-number {
+  flex: 1;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 37px;
+}
+
+.kcal-card-number span {
+  margin-left: 6px;
+  font-size: 13px;
+  color: var(--ink-sub);
+}
+
+.kcal-card-number.is-exercise,
+.kcal-card-number.is-exercise span {
+  color: var(--exercise-text);
+}
+
+.kcal-card-note {
+  margin-top: 8px !important;
+  font-size: 11px;
+  color: var(--ink-sub);
+}
+
+.kcal-card.has-icon .kcal-card-note {
+  margin-top: 4px !important;
+}
+
+/* 「自分で直しました」の印 */
+.badge {
+  padding: 0 9px;
+  border-radius: 999px;
+  background: var(--range-bg);
+  color: var(--range);
+  font-weight: 700;
+  line-height: 17px;
+}
+
+/* 時刻・区分の行 */
+.form-row {
+  position: relative;
+  height: 52px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.form-row-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+
+.form-row-dot {
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+.form-row-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-row-value {
+  flex: 1;
+  text-align: right;
+  font-size: 13px;
+  color: var(--ink-sub);
+}
+
+.form-row-arrow {
+  width: 16px;
+  text-align: right;
+  font-size: 18px;
+  color: var(--ink-sub);
+}
+
+/* 時刻の入力欄は見えないように行の下に置く（スマホの選び方を出すため） */
+.form-row-time {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.primary-button {
+  display: block;
+  width: 100%;
+  height: 52px;
+  border-radius: 26px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.primary-button:disabled {
+  opacity: 0.3;
+}
+
+/* 下から出るシート */
+.sheet-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+}
+
+.sheet-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  animation: fade-in 0.2s ease;
+}
+
+.sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 16px calc(24px + var(--home-indicator));
+  border-radius: 20px 20px 0 0;
+  background: var(--bg);
+  animation: slide-up 0.25s ease;
+}
+
+.sheet-handle {
+  align-self: center;
+  width: 41px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--line);
+}
+
+.sheet-title {
+  margin: 11px 0 0;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.sheet-title.is-large {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.sheet-title.is-large + .sheet-sub {
+  margin-top: 6px;
+}
+
+.sheet-sub {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--ink-sub);
+}
+
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+/* カロリーを数字キーで打つシート */
+.kcal-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 72px;
+  margin-top: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+}
+
+.kcal-input-number {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.kcal-input-number.is-exercise {
+  color: var(--exercise-text);
+}
+
+.kcal-input-caret {
+  width: 2px;
+  height: 34px;
+  margin-left: 2px;
+  background: var(--ink);
+  animation: blink 1s steps(1) infinite;
+}
+
+.kcal-input-unit {
+  margin-left: 10px;
+  padding-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-sub);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.kcal-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.kcal-steps button {
+  height: 36px;
+  border-radius: 18px;
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-sub);
+}
+
+.sheet-confirm {
+  margin-top: 10px;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px 8px;
+  margin: 6px -16px calc(-24px - var(--home-indicator));
+  padding: 6px 8px max(10px, var(--home-indicator));
+  background: var(--card);
+}
+
+.keypad button {
+  display: grid;
+  place-items: center;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.keypad button:active,
+.kcal-steps button:active,
+.chip:active {
+  opacity: 0.6;
+}

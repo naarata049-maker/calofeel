@@ -62,3 +62,64 @@ export function ExerciseIcon() {
     </svg>
   )
 }
+
+// 記録する画面のアイコン（Figma R1〜R4 から）
+export function CloseIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M2 2L12 12M12 2L2 12" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function PencilIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M9.5 2.5L11.5 4.5L5 11H3V9L9.5 2.5Z" stroke="#1E2422" strokeWidth="1.6" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+export function PlusMinusIcon({ plus }: { plus?: boolean }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d={plus ? 'M7 1V13M1 7H13' : 'M1 7H13'} stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function BackspaceIcon() {
+  return (
+    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+      <path d="M8 2H20V14H8L2 8L8 2Z" stroke="#1E2422" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M11 6L15 10M15 6L11 10" stroke="#1E2422" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function CheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3 8.5L6.2 11.5L13 4.5" stroke="#3E7A58" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+// カメラの枠（四すみのかぎ）
+export function FinderFrame() {
+  return (
+    <svg width="240" height="240" viewBox="0 0 240 240" fill="none" aria-hidden="true">
+      <path d="M2 40V14C2 7 7 2 14 2H40M200 2H226C233 2 238 7 238 14V40M238 200V226C238 233 233 238 226 238H200M40 238H14C7 238 2 233 2 226V200" stroke="white" strokeWidth="4" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+// 写真がない食事の記録に出す仮の絵（お椀）
+export function BowlIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+      <path d="M3 12H23C23 17.5 18.5 21 13 21C7.5 21 3 17.5 3 12Z" stroke="#8a928f" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M9 8.5C9 7 10 6.5 10 5M13 8.5C13 7 14 6.5 14 5M17 8.5C17 7 18 6.5 18 5" stroke="#8a928f" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}

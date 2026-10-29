@@ -1,0 +1,454 @@
+/* 「記録する」は画面全体にかぶせる（タブバーも隠す） */
+.record {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  animation: slide-up 0.3s ease;
+}
+
+.record-header {
+  position: relative;
+  flex: none;
+  height: calc(68px + var(--status-bar));
+}
+
+.record-header .round-button {
+  position: absolute;
+  top: calc(15px + var(--status-bar));
+  left: 46px;
+}
+
+.record-header h1 {
+  position: absolute;
+  top: calc(21px + var(--status-bar));
+  left: 96px;
+  right: 96px;
+  margin: 0;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.record-mode {
+  flex: none;
+  width: 201px;
+  margin: 12px auto 0;
+}
+
+.record-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 16px 20px;
+}
+
+.record-footer {
+  flex: none;
+  padding: 12px 16px max(16px, var(--home-indicator));
+}
+
+/* 見出し（料理・量・時間 など） */
+.record-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 17px;
+  margin: 24px 8px 0;
+}
+
+.record-heading h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.record-heading-note {
+  font-size: 11px;
+  color: var(--ink-sub);
+}
+
+.record-heading-note.is-right {
+  margin-left: auto;
+}
+
+.record-chips {
+  margin: 9px 8px 0;
+}
+
+.record-segment {
+  margin-top: 9px;
+}
+
+.record-card {
+  margin-top: 16px;
+}
+
+.record-card.is-exercise {
+  margin-top: 18px;
+}
+
+.record-rows {
+  margin: 12px 8px 0;
+}
+
+.record-note {
+  margin: 18px 8px 0;
+  font-size: 12px;
+  line-height: 19px;
+  color: var(--ink-sub);
+}
+
+/* ---- R1 撮る ---- */
+.camera {
+  position: relative;
+  flex: 1 1 420px;
+  max-height: 420px;
+  min-height: 240px;
+  margin: 48px 16px 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #222;
+}
+
+.camera-view {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.camera-frame {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 0;
+}
+
+.camera-guide {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0 14px;
+  border-radius: 17px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 34px;
+  white-space: nowrap;
+}
+
+.camera-actions {
+  position: relative;
+  flex: none;
+  height: 84px;
+  margin: 53px 0 calc(max(16px, var(--home-indicator)) + 4px);
+}
+
+.camera-library {
+  position: absolute;
+  top: 16px;
+  left: 44px;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.camera-library img {
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.camera-library span {
+  margin-top: 2px;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--ink-sub);
+}
+
+.shutter {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.shutter span {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.shutter:active span {
+  transform: scale(0.92);
+}
+
+.camera-manual {
+  position: absolute;
+  top: 34px;
+  right: 23px;
+}
+
+/* ---- R2 推定結果 ---- */
+.record-photo {
+  display: block;
+  width: 100%;
+  height: 180px;
+  margin-top: 12px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.record-photo + .record-heading {
+  min-height: 26px;
+  margin-top: 12px;
+}
+
+.record-photo + .record-heading + .record-chips {
+  margin-top: 6px;
+}
+
+.name-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  margin-left: auto;
+  padding: 0 12px 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.record-custom-name {
+  margin: 10px 8px 0;
+  font-size: 12px;
+  color: var(--ink-sub);
+}
+
+/* ---- R4 手で入力 ---- */
+.record-mode + .record-heading {
+  margin-top: 20px;
+}
+
+.name-input {
+  position: relative;
+  margin-top: 9px;
+}
+
+.name-input input {
+  width: 100%;
+  height: 52px;
+  padding: 0 44px 0 16px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg);
+  outline: none;
+  caret-color: var(--ink);
+}
+
+.name-input input::placeholder {
+  color: var(--ink-off);
+  font-weight: 400;
+}
+
+.clear-button {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--line);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.candidates {
+  margin: 12px 8px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.candidates button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 44px;
+  border-bottom: 1px solid var(--line-soft);
+  text-align: left;
+}
+
+.candidate-check {
+  width: 24px;
+  line-height: 0;
+}
+
+.candidate-name {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.candidates .is-selected .candidate-name {
+  font-weight: 700;
+}
+
+.candidate-kcal {
+  font-size: 13px;
+  color: var(--ink-sub);
+}
+
+.candidates-empty {
+  margin: 12px 8px 0;
+  font-size: 12px;
+  color: var(--ink-sub);
+}
+
+.candidates + .record-heading,
+.candidates-empty + .record-heading {
+  margin-top: 14px;
+}
+
+.candidates + .record-heading + .record-segment {
+  margin-top: 7px;
+}
+
+/* ---- R3 運動 ---- */
+.minutes {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  margin-top: 9px;
+  padding: 0 10px;
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.minutes p {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+}
+
+.minutes strong {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.minutes span {
+  margin-left: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-sub);
+}
+
+.minutes .round-button {
+  padding-left: 0;
+}
+
+.minutes .round-button:disabled {
+  opacity: 0.4;
+}
+
+.minutes + .record-heading {
+  margin-top: 20px;
+}
+
+/* ---- シートの中身 ---- */
+.name-input.is-sheet {
+  margin-top: 14px;
+}
+
+.name-input.is-sheet input {
+  height: 56px;
+  border-width: 1.5px;
+  background: var(--card);
+  font-size: 17px;
+  caret-color: var(--exercise-text);
+}
+
+.name-input.is-sheet .clear-button {
+  width: 22px;
+  height: 22px;
+  background: #c9cecc;
+  font-size: 13px;
+  line-height: 22px;
+}
+
+.sheet-note {
+  margin: 10px 8px 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--ink-sub);
+}
+
+.sheet-label {
+  margin: 6px 8px 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-sub);
+}
+
+.sheet-chips {
+  margin-top: 8px;
+}
+
+.sheet-button {
+  margin-top: 18px;
+}
+
+.sheet-heading {
+  margin: 22px 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+}
+
+.sheet-chips.is-category {
+  margin-top: 9px;
+}
+
+.sheet-note.is-category {
+  margin-top: 20px;
+}
+
+.sheet-button.is-category {
+  margin-top: 34px;
+}

@@ -2,13 +2,13 @@ import { useRef, useState, type PointerEvent } from 'react'
 import { Header } from '../components/Header'
 import { Meter, lapCount } from '../components/Meter'
 import { RecordSheet } from '../components/RecordSheet'
-import { TODAY, TWO_DAYS_AGO, YESTERDAY } from '../data/today'
+import { TWO_DAYS_AGO, YESTERDAY, type DayRecord } from '../data/today'
 import './Home.css'
 
 const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 
-// いまは仮の3日分だけ（0 = 今日、-1 = 昨日、-2 = 一昨日）
-const DAYS = [TODAY, YESTERDAY, TWO_DAYS_AGO]
+// 前の日は仮の2日分だけ（-1 = 昨日、-2 = 一昨日）
+const PAST_DAYS = [YESTERDAY, TWO_DAYS_AGO]
 
 // 見出し：今日・昨日・一昨日、それより前は「○日前」
 function dayTitle(daysAgo: number) {
@@ -24,7 +24,7 @@ function formatDate(d: Date) {
   return `${d.getMonth() + 1}月${d.getDate()}日（${WEEKDAYS[d.getDay()]}）`
 }
 
-export function Home() {
+export function Home({ today }: { today: DayRecord[] }) {
   // メーターをタップすると記録シートが下がる（どの日も同じ）
   const [lowered, setLowered] = useState(false)
   const [offset, setOffset] = useState(0)
@@ -33,6 +33,7 @@ export function Home() {
   const [drag, setDrag] = useState(0)
   const pointer = useRef<{ x: number; y: number; moved: boolean } | null>(null)
 
+  const DAYS = [today, ...PAST_DAYS]
   const day = { records: DAYS[-offset], title: dayTitle(-offset) }
   const laps = lapCount(day.records)
   const date = new Date()

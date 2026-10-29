@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { BackspaceIcon, PencilIcon } from './icons'
 import './form.css'
 
@@ -86,19 +86,17 @@ export function FormRow({ label, value, dot, onClick, children }: {
   )
 }
 
-// 時刻の行：タップするとスマホの時刻の選び方が出る
+// 時刻の行：見えない時刻の入力欄を行の上にかぶせ、タップするとスマホの時刻の選び方が出る
 export function TimeRow({ time, note, onChange }: { time: string; note?: string; onChange: (t: string) => void }) {
-  const input = useRef<HTMLInputElement>(null)
   const [h, m] = time.split(':')
   return (
-    <FormRow label="時刻" value={note ? `${time}（${note}）` : time}
-      onClick={() => {
-        const el = input.current
-        if (!el) return
-        try { el.showPicker() } catch { el.focus() }
-      }}>
-      <input ref={input} className="form-row-time" type="time" aria-label="時刻"
+    <FormRow label="時刻" value={note ? `${time}（${note}）` : time}>
+      <input className="form-row-time" type="time" aria-label="時刻"
         value={`${h.padStart(2, '0')}:${m}`}
+        onClick={(e) => {
+          // PC のブラウザは欄をクリックしただけでは選び方が出ないので出す
+          try { e.currentTarget.showPicker() } catch { /* iPhone はタップで出る */ }
+        }}
         onChange={(e) => {
           if (!e.target.value) return
           const [hh, mm] = e.target.value.split(':')
@@ -118,11 +116,12 @@ export function Sheet({ title, sub, onClose, children, large, keyboard }: {
   // 文字を打つシート：スマホのキーボードの上に出す
   keyboard?: boolean
 }) {
-  const inset = useKeyboardInset(keyboard)
+  const visible = useVisibleArea(keyboard)
   return (
-    <div className="sheet-layer">
+    <div className={`sheet-layer${visible ? ' is-keyboard' : ''}`}
+      style={visible ? { top: visible.top, height: visible.height } : undefined}>
       <button className="sheet-backdrop" aria-label="閉じる" onClick={onClose} />
-      <section className="sheet" role="dialog" aria-label={title} style={inset ? { bottom: inset } : undefined}>
+      <section className="sheet" role="dialog" aria-label={title}>
         <span className="sheet-handle" />
         <h2 className={`sheet-title${large ? ' is-large' : ''}`}>{title}</h2>
         {sub && <p className="sheet-sub">{sub}</p>}
@@ -132,13 +131,17 @@ export function Sheet({ title, sub, onClose, children, large, keyboard }: {
   )
 }
 
-// iPhone の Safari ではキーボードが画面にかぶるので、そのぶん上げる
-function useKeyboardInset(enabled?: boolean) {
-  const [inset, setInset] = useState(0)
+// iPhone の Safari ではキーボードが出ると見えている範囲が狭くなり、画面も上へずれる。
+// キーボードが出ているあいだは、シートを「いま見えている範囲」の下にぴったり置く
+function useVisibleArea(enabled?: boolean) {
+  const [area, setArea] = useState<{ top: number; height: number } | null>(null)
   useEffect(() => {
     const vv = window.visualViewport
     if (!enabled || !vv) return
-    const update = () => setInset(Math.max(0, window.innerHeight - vv.height - vv.offsetTop))
+    const update = () => {
+      const keyboardOpen = window.innerHeight - vv.height > 80
+      setArea(keyboardOpen ? { top: vv.offsetTop, height: vv.height } : null)
+    }
     vv.addEventListener('resize', update)
     vv.addEventListener('scroll', update)
     update()
@@ -147,7 +150,7 @@ function useKeyboardInset(enabled?: boolean) {
       vv.removeEventListener('scroll', update)
     }
   }, [enabled])
-  return inset
+  return area
 }
 
 // カロリーを数字キーで打つシート（R2b・R3b）

@@ -220,10 +220,10 @@
 /* ---- R2 推定結果 ---- */
 .record-photo {
   display: block;
-  width: 100%;
-  /* 「量」から下が「手動で入力」の画面と同じ位置になる高さ（林さんの指定） */
+  /* 正方形（Figma 3-2）。大きさは「量」から下が「手動で入力」の画面と同じ位置になるように決める */
+  width: 152px;
   height: 152px;
-  margin-top: 12px;
+  margin: 12px auto 0;
   border-radius: 16px;
   object-fit: cover;
 }
@@ -470,7 +470,7 @@
   .record-rows .form-row { height: 46px; }
   .record-note { margin-top: 8px; }
 
-  .record-photo { height: 133px; margin-top: 8px; }
+  .record-photo { width: 133px; height: 133px; margin-top: 8px; }
   .candidates + .record-heading + .record-segment,
   .record-photo ~ .record-segment { margin-top: 6px; }
   .record-photo + .record-heading { margin-top: 8px; }

@@ -2,15 +2,14 @@ import { useState } from 'react'
 import { Header } from '../components/Header'
 import { FormRow, NumberSheet, Segmented, Sheet } from '../components/form'
 import { PlusMinusIcon } from '../components/icons'
-import { HISTORY_DAYS, recordsFor, totals } from '../data/history'
-import type { DayRecord } from '../data/today'
+import { HISTORY_DAYS, recordsFor, totals, type DayBook } from '../data/history'
 import { mondayOf, sameDay, type WeightEntry } from '../data/weight'
 import { useSettings } from '../settings'
 import './Body.css'
 
 // 「変化」タブ：体重の週の平均（Figma 6-1）と、体重を記録（6-2）
 type Props = {
-  today: DayRecord[]
+  book: DayBook
   weights: WeightEntry[]
   onRecordWeight: (entry: WeightEntry) => void
   onReview: () => void
@@ -22,7 +21,7 @@ const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 // グラフの位置（カード 361×230 の中）
 const PLOT = { left: 60, right: 320, top: 30, bottom: 150 }
 
-export function Body({ today, weights, onRecordWeight, onReview }: Props) {
+export function Body({ book, weights, onRecordWeight, onReview }: Props) {
   const { settings, dailyBurn, update } = useSettings()
   const [range, setRange] = useState(0) // 0 1か月・1 3か月
   const [sheet, setSheet] = useState<'weight' | 'waist' | null>(null)
@@ -41,7 +40,7 @@ export function Body({ today, weights, onRecordWeight, onReview }: Props) {
     const to = Math.round((Date.now() - w.date.getTime()) / 86400000)
     let balance = 0
     for (let d = Math.min(from, HISTORY_DAYS); d > Math.max(to, 0); d--) {
-      const t = totals(recordsFor(d, today), dailyBurn)
+      const t = totals(recordsFor(d, book), dailyBurn)
       balance += t.eaten - t.burned
     }
     return shown[0].kg + balance / 7200

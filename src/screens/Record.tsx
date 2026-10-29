@@ -200,7 +200,7 @@ function MealForm({ photo, burned, onBack, onMode, onSave }: {
 
   const save = () => {
     if (!kcal || !name) return
-    onSave({ kind: 'meal', time, category, name, kcal, photo: photo?.src })
+    onSave({ kind: 'meal', time, category, name, kcal, photo: photo?.src, amount })
   }
 
   return (
@@ -327,7 +327,7 @@ function NameSheet({ initial, guessName, onClose, onConfirm }: {
 }
 
 // R2f 区分を選ぶ
-function CategorySheet({ initial, onClose, onConfirm }: {
+export function CategorySheet({ initial, onClose, onConfirm }: {
   initial: MealCategory
   onClose: () => void
   onConfirm: (c: MealCategory) => void

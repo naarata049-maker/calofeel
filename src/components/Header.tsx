@@ -9,9 +9,11 @@ type Props = {
   onPrev?: () => void
   onNext?: () => void
   right?: ReactNode
+  // 日付をタップするとカレンダー（Figma 2-7）
+  onDateClick?: () => void
 }
 
-export function Header({ title, sub, onPrev, onNext, right }: Props) {
+export function Header({ title, sub, onPrev, onNext, right, onDateClick }: Props) {
   return (
     <header className="header">
       <div className="header-side">
@@ -22,8 +24,21 @@ export function Header({ title, sub, onPrev, onNext, right }: Props) {
         )}
       </div>
       <div className="header-title">
-        {sub && <p className="t-date">{sub}</p>}
-        <h1 className="t-title">{title}</h1>
+        {onDateClick ? (
+          <button className="header-date" onClick={onDateClick} aria-label={`${sub ?? ''} 日付を選ぶ`}>
+            <span className="t-date header-date-line">{sub}
+              <svg width="11" height="7" viewBox="0 0 11 7" fill="none" aria-hidden="true">
+                <path d="M1 1.2 5.5 5.5 10 1.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span className="t-title">{title}</span>
+          </button>
+        ) : (
+          <>
+            {sub && <p className="t-date">{sub}</p>}
+            <h1 className="t-title">{title}</h1>
+          </>
+        )}
       </div>
       <div className="header-side">
         {onNext && (

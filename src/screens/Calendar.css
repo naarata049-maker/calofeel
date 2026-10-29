@@ -1,0 +1,143 @@
+/* 2-7 日付を選ぶカレンダー（Figma 163:213。シートはタブバーの上までかぶせる） */
+.calendar.sheet {
+  padding-bottom: calc(26px + var(--home-indicator));
+}
+
+.calendar-head {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  margin: 9px 8px 0;
+}
+
+.calendar-head h2 {
+  margin: 0;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.calendar-nav {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background: var(--card);
+}
+
+.calendar-nav:disabled {
+  opacity: 0.35;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* 曜日の行は 14px＋下に 10px、日の行は 48px */
+  grid-template-rows: 24px;
+  grid-auto-rows: 48px;
+  margin-top: 18px;
+}
+
+.calendar-grid .calendar-weekday {
+  height: 14px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  color: var(--ink-off);
+}
+
+.calendar-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-number {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.calendar-day.is-off .calendar-number {
+  color: #b9c0bd;
+}
+
+.calendar-day.is-today .calendar-number {
+  border: 1.5px solid var(--ink);
+  font-weight: 700;
+}
+
+.calendar-day.is-selected .calendar-number {
+  border: 0;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.calendar-day:not(:disabled):active .calendar-number {
+  background: var(--card);
+}
+
+.calendar-day.is-selected:active .calendar-number {
+  background: var(--ink);
+}
+
+.calendar-dot {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.calendar-day .calendar-dot {
+  margin-top: 3px;
+}
+
+.calendar-dot.is-inside { background: #abb3b0; }
+.calendar-dot.is-over { background: #cc8f5c; }
+.calendar-dot.is-under { background: #6fa2db; }
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--ink-off);
+}
+
+.calendar-legend span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.calendar-legend .calendar-dot {
+  width: 7px;
+  height: 7px;
+}
+
+.calendar-ring {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border: 1.2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.calendar-note {
+  margin: 18px 0 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--ink-off);
+}

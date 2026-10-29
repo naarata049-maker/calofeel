@@ -6,10 +6,12 @@ type Props = {
   records: DayRecord[]
   lowered: boolean
   title: string
+  // 食事をタップすると詳細（Figma 2-5）
+  onSelect?: (id: string) => void
 }
 
 // 今日の記録（白30%＋背景ぼかしの下地）。シートの中だけスクロールする
-export function RecordSheet({ records, lowered, title }: Props) {
+export function RecordSheet({ records, lowered, title, onSelect }: Props) {
   let exerciseIndex = 0
 
   return (
@@ -23,7 +25,8 @@ export function RecordSheet({ records, lowered, title }: Props) {
           const isExercise = r.kind === 'exercise'
           const color = isExercise ? exerciseColor(exerciseIndex++) : MEAL_COLOR[r.category]
           return (
-            <li key={r.id} className="record-row">
+            <li key={r.id} className={`record-row${!isExercise && onSelect ? ' is-button' : ''}`}
+              onClick={!isExercise && onSelect ? () => onSelect(r.id) : undefined}>
               <span className="record-time">{r.time}</span>
               <span className="record-dot" style={{ background: color }} />
               {isExercise ? (

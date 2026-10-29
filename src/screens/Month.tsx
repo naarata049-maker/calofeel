@@ -2,15 +2,15 @@ import { useState } from 'react'
 import { Header } from '../components/Header'
 import { Segmented } from '../components/form'
 import { CATEGORIES } from '../data/foods'
-import { HISTORY_DAYS, daysBetween, recordsFor, totals } from '../data/history'
+import { HISTORY_DAYS, daysBetween, recordsFor, totals, type DayBook } from '../data/history'
 import { rangeOf } from '../data/settings'
-import { MEAL_COLOR, type DayRecord } from '../data/today'
+import { MEAL_COLOR } from '../data/today'
 import { useSettings } from '../settings'
 import './Month.css'
 
 // 「記録」タブ：週と月の、食べた量の棒グラフ（Figma 5-1）
 type Props = {
-  today: DayRecord[]
+  book: DayBook
   // 日をタップすると、その日のホームへ
   onOpenDay: (daysAgo: number) => void
 }
@@ -31,7 +31,7 @@ const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土']
 const ZERO_Y = 250
 const TOP_Y = 30
 
-export function Month({ today, onOpenDay }: Props) {
+export function Month({ book, onOpenDay }: Props) {
   const { settings, dailyBurn } = useSettings()
   const [mode, setMode] = useState(1) // 0 週・1 月
   const [shift, setShift] = useState(0) // 0 = いまの週・月、-1 = ひとつ前
@@ -53,7 +53,7 @@ export function Month({ today, onOpenDay }: Props) {
 
   const days: Day[] = dates.map((date) => {
     const daysAgo = daysBetween(date, todayDate)
-    const records = daysAgo < 0 || daysAgo > HISTORY_DAYS ? null : recordsFor(daysAgo, today)
+    const records = daysAgo < 0 || daysAgo > HISTORY_DAYS ? null : recordsFor(daysAgo, book)
     const { eaten, burned } = totals(records ?? [], dailyBurn)
     const meals = records && records.some((r) => r.kind === 'meal')
       ? CATEGORIES.map((c) => ({

@@ -13,6 +13,9 @@ export type MealRecord = {
   name: string
   kcal: number
   photo?: string
+  // 量（foods.ts の AMOUNTS の番号）。ないときは「ふつう」
+  amount?: number
+  memo?: string
 }
 
 export type ExerciseRecord = {

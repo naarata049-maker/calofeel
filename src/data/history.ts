@@ -1,4 +1,4 @@
-import { TWO_DAYS_AGO, YESTERDAY, type DayRecord, type MealCategory } from './today'
+import { TODAY, TWO_DAYS_AGO, YESTERDAY, type DayRecord, type MealCategory } from './today'
 import toast from '../assets/photos/toast.jpg'
 import ramen from '../assets/photos/ramen.jpg'
 import donut from '../assets/photos/donut.jpg'
@@ -58,9 +58,13 @@ export function daysBetween(a: Date, b: Date) {
   return Math.round((day(b) - day(a)) / 86400000)
 }
 
-// daysAgo 日前の記録（0 は今日。今日の分は App が持っている）
-export function recordsFor(daysAgo: number, today: DayRecord[]): DayRecord[] {
-  if (daysAgo === 0) return today
+// 記録したり直したりした日の記録（キーは何日前か）。App が持っていて、ない日は見本を使う
+export type DayBook = Record<number, DayRecord[]>
+
+// daysAgo 日前の記録（0 は今日）
+export function recordsFor(daysAgo: number, book: DayBook): DayRecord[] {
+  if (book[daysAgo]) return book[daysAgo]
+  if (daysAgo === 0) return TODAY
   if (daysAgo === 1) return YESTERDAY
   if (daysAgo === 2) return TWO_DAYS_AGO
   if (daysAgo > HISTORY_DAYS) return []

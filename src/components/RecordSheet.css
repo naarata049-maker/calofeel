@@ -125,3 +125,11 @@
 .record-kcal.is-exercise {
   color: var(--exercise-text);
 }
+
+.record-row.is-button {
+  cursor: pointer;
+}
+
+.record-row.is-button:active {
+  opacity: 0.6;
+}

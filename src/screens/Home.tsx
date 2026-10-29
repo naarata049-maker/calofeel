@@ -2,8 +2,7 @@ import { useRef, useState, type PointerEvent } from 'react'
 import { Header } from '../components/Header'
 import { Meter, lapCount } from '../components/Meter'
 import { RecordSheet } from '../components/RecordSheet'
-import { type DayRecord } from '../data/today'
-import { HISTORY_DAYS, recordsFor } from '../data/history'
+import { HISTORY_DAYS, recordsFor, type DayBook } from '../data/history'
 import { useSettings } from '../settings'
 import './Home.css'
 
@@ -24,8 +23,15 @@ function formatDate(d: Date) {
   return `${d.getMonth() + 1}月${d.getDate()}日（${WEEKDAYS[d.getDay()]}）`
 }
 
-// startDaysAgo：「記録」のグラフで日をタップしたときは、その日から開く
-export function Home({ today, startDaysAgo = 0 }: { today: DayRecord[]; startDaysAgo?: number }) {
+type Props = {
+  book: DayBook
+  // 「記録」のグラフやカレンダーで日を選んだときは、その日から開く
+  startDaysAgo?: number
+  onOpenMeal: (daysAgo: number, id: string) => void
+  onOpenCalendar: (daysAgo: number) => void
+}
+
+export function Home({ book, startDaysAgo = 0, onOpenMeal, onOpenCalendar }: Props) {
   // メーターをタップすると記録シートが下がる（どの日も同じ）
   const [lowered, setLowered] = useState(false)
   const [offset, setOffset] = useState(-startDaysAgo)
@@ -35,7 +41,7 @@ export function Home({ today, startDaysAgo = 0 }: { today: DayRecord[]; startDay
   const pointer = useRef<{ x: number; y: number; moved: boolean } | null>(null)
 
   const { dailyBurn } = useSettings()
-  const day = { records: recordsFor(-offset, today), title: dayTitle(-offset) }
+  const day = { records: recordsFor(-offset, book), title: dayTitle(-offset) }
   const laps = lapCount(day.records, dailyBurn)
   const date = new Date()
   date.setDate(date.getDate() + offset)
@@ -82,6 +88,7 @@ export function Home({ today, startDaysAgo = 0 }: { today: DayRecord[]; startDay
         title={day.title}
         onPrev={offset > -HISTORY_DAYS ? () => changeDay(offset - 1) : undefined}
         onNext={offset < 0 ? () => changeDay(offset + 1) : undefined}
+        onDateClick={() => onOpenCalendar(-offset)}
       />
       <div
         className="home-meter"
@@ -117,7 +124,8 @@ export function Home({ today, startDaysAgo = 0 }: { today: DayRecord[]; startDay
           ))}
         </div>
       )}
-      <RecordSheet records={day.records} lowered={lowered} title={`${day.title}の記録`} />
+      <RecordSheet records={day.records} lowered={lowered} title={`${day.title}の記録`}
+        onSelect={(id) => onOpenMeal(-offset, id)} />
     </div>
   )
 }

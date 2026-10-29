@@ -1,0 +1,46 @@
+.home {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home-meter {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  width: 393px;
+  height: 310px;
+}
+
+.meter {
+  display: block;
+  overflow: visible;
+}
+
+.meter text {
+  font-family: var(--font);
+}
+
+.meter-number {
+  font-size: 31.2px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+.meter-sub,
+.meter-zero {
+  font-size: 9.36px;
+  fill: var(--ink-sub);
+}
+
+.meter-zero {
+  font-size: 8.58px;
+}
+
+.meter-range {
+  font-size: 8.58px;
+  font-weight: 700;
+  fill: var(--range-mark);
+}

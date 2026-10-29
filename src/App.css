@@ -26,42 +26,15 @@
   overflow-y: auto;
 }
 
-/* 土台を確かめるための仮の中身 */
+/* ホームは画面全体を動かさず、記録シートの中だけスクロールする */
+.screen.is-fixed {
+  overflow: hidden;
+}
+
+/* まだ作っていない画面の仮の中身 */
 .placeholder {
   margin: 16px 23px;
   padding: 20px;
   border-radius: var(--radius-card);
   background: var(--card);
-}
-
-.placeholder h2 {
-  margin: 0 0 12px;
-}
-
-.swatches {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin: 0 0 16px;
-}
-
-.swatch {
-  aspect-ratio: 1;
-  border-radius: 10px;
-}
-
-.swatch-label {
-  font-size: 10px;
-  color: var(--ink-sub);
-  text-align: center;
-  margin-top: 2px;
-}
-
-.chip {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-right: 6px;
 }

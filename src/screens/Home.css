@@ -12,6 +12,61 @@
   display: block;
   width: 393px;
   height: 310px;
+  cursor: pointer;
+  /* 縦のスクロールはブラウザにまかせ、横の動きはスワイプに使う */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-meter:focus-visible {
+  outline: none;
+}
+
+.home-meter-track {
+  position: absolute;
+  inset: 0;
+}
+
+.home-meter-track.is-settling {
+  transition: transform 0.3s ease;
+}
+
+.home-meter-lap {
+  position: absolute;
+  top: 0;
+  width: 393px;
+  height: 310px;
+}
+
+/* 円の下のページの点。記録シートの少し上に置き、シートと一緒に下がる */
+.home-dots {
+  position: absolute;
+  top: calc(252px + var(--status-bar));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  padding-left: 1px;
+  pointer-events: none;
+  transition: top 0.3s ease;
+}
+
+.home-dots.is-lowered {
+  top: calc(366px + var(--status-bar));
+}
+
+.home-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.home-dots span.is-current {
+  background: var(--ink);
 }
 
 .meter {

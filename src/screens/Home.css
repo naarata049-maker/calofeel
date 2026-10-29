@@ -6,7 +6,7 @@
 
 .home-meter {
   position: absolute;
-  top: calc(68px + var(--status-bar));
+  top: calc(54px + var(--status-bar));
   left: 50%;
   transform: translateX(-50%);
   display: block;

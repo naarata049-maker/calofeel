@@ -3,7 +3,7 @@
   grid-template-columns: 42px 1fr 42px;
   align-items: start;
   gap: 8px;
-  padding: calc(12px + var(--status-bar)) 45px 4px;
+  padding: calc(18px + var(--status-bar)) 45px 4px;
 }
 
 .header-title {
@@ -16,7 +16,7 @@
 }
 
 .header-side {
-  padding-top: 2px;
+  padding-top: 3px;
 }
 
 .round-button {

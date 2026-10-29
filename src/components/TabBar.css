@@ -3,8 +3,8 @@
   flex: none;
   display: grid;
   grid-template-columns: 1fr 1fr 64px 1fr 1fr;
-  height: calc(var(--tabbar-height) + var(--home-indicator));
-  padding-bottom: var(--home-indicator);
+  height: calc(var(--tabbar-height) + max(5px, var(--home-indicator)));
+  padding-bottom: max(5px, var(--home-indicator));
   background: var(--bg);
   border-top: 1px solid var(--line);
 }
